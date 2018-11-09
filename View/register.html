@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>IT 202 - HW4 Register</title>
+		<script type="text/javascript">
+			function validate(){
+				var fname = document.forms["form"]["fname"].value;
+				var lname = document.forms["form"]["lname"].value;
+				var email = document.forms["form"]["email"].value;
+				var cardno = document.forms["form"]["card-number"].value;
+				var patron = document.forms["form"]["patron-name"].value;
+				if(fname == "" || lname == "" || email == "" || cardno == "" || patron == ""){
+					alert("Please enter all the required information.");
+					return false;
+				}
+
+				else{ 
+					if(/^\d+$/.test(val) == false){
+						alert("Please enter only numbers for card number.");
+						return false;
+					}
+					else{ return (true) ; }
+				}
+
+			}
+		</script>
+	</head>
+	<body>
+		<form name = "form" method="POST" action="../Control/register.php" onsubmit="return validate();">
+			<label>Enter first name: </label>
+			<input type="text" name="fname">
+			<label>Enter last name: </label>
+			<input type="text" name="lname">
+			<label>Enter Email Address: </label>
+			<input type="email" name="email">
+			<label>Enter a Card No: </label>
+			<input type="number" name="card-number" placeholder="Only Digits">
+			<label>Enter a Patron Username: </label>
+			<input type="text" name="patron-name">
+			<input type="submit" name="submit" value="Confirm">
+		</form>
+		<p>Already have a Patron Account? <a href="login.html">Sign In Here</a></p>
+	</body>
+</html>

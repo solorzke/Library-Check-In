@@ -5,6 +5,7 @@
 		<title>IT202 - HW4</title>
 	</head>
 	<body>
+		<a href="../Control/index.php?action=sign_out">Log Out</a>
 		<h1>View Records!</h1>
 		<table>
 			<tr>
@@ -22,21 +23,23 @@
 				<th>Author On Order</th>
 				<th>Patron Name</th>
 			</tr>
+			<?php foreach($records as $record): ?>
 			<tr>
-				<td><?php echo "{$_SESSION['user']->getID()}";	?></td>
-				<td><?php echo "{$_SESSION['user']->getFName()}";	?></td>
-				<td><?php echo "{$_SESSION['user']->getLName()}";	?></td>
-				<td><?php echo "{$_SESSION['user']->getCardNo()}";	?></td>
-				<td><?php echo "{$_SESSION['user']->getEmail()}";	?></td>
-				<td><?php echo "{$_SESSION['user']->getBookTitle()}";	?></td>
-				<td><?php echo "{$_SESSION['user']->getFAuthor()}";	?></td>
-				<td><?php echo "{$_SESSION['user']->getLAuthor()}";	?></td>
-				<td><?php echo "{$_SESSION['user']->getCallNo()}";	?></td>
-				<td><?php echo "{$_SESSION['user']->getDueDate()}";	?></td>
-				<td><?php echo "{$_SESSION['user']->getOnOrder()}";	?></td>
-				<td><?php echo "{$_SESSION['user']->getAuthorOrder()}";	?></td>
-				<td><?php echo "{$_SESSION['user']->getPatronName()}";	?></td>
+				<td><?php echo "{$record->getID()}";	?></td>
+				<td><?php echo "{$record->getFName()}";	?></td>
+				<td><?php echo "{$record->getLName()}";	?></td>
+				<td><?php echo "{$record->getCardNo()}";	?></td>
+				<td><?php echo "{$record->getEmail()}";	?></td>
+				<td><?php echo "{$record->getBookTitle()}";	?></td>
+				<td><?php echo "{$record->getFAuthor()}";	?></td>
+				<td><?php echo "{$record->getLAuthor()}";	?></td>
+				<td><?php echo "{$record->getCallNo()}";	?></td>
+				<td><?php echo "{$record->getDate()}";	?></td>
+				<td><?php echo "{$record->getOnOrder()}";	?></td>
+				<td><?php echo "{$record->getAuthorOrder()}";	?></td>
+				<td><?php echo "{$record->getPatronName()}";	?></td>
 			</tr>
+			<?php endforeach; ?>
 		</table>
 		<a href="../Control/index.php?action=home">Home</a>
 	</body>
