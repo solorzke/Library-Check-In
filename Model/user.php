@@ -18,6 +18,15 @@ class User{
 		$this->cardNo = $cardNo;
 	}
 
+	public function __construct6($id, $fname, $lname, $email, $patronName, $cardno){
+		$this->id = $id;
+		$this->fname = $fname;
+		$this->lname = $lname;
+		$this->email = $email;
+		$this->patronName = $patronName;
+		$this->cardNo = $cardno;
+	}
+
 	function __construct13($id, $fname, $lname, $cardNo, $email, $booktitle, $fauthor, $lauthor, $callnumber, $duedate, $onorder, $authororder, $patronName){
 		$this->id = $id;
 		$this->fname = $fname;

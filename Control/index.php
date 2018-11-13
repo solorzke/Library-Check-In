@@ -21,7 +21,8 @@ if($action == 'home'){
 
 if($action == 'view_record'){
 	$records = Query::getAllUserInfo($_SESSION['name']);
-	include '../View/view_records.php';
+	if($records == false) { header('Location: index.php?action=home&confirm=no'); }
+	else{ include '../View/view_records.php'; } 
 }
 
 if($action == 'search_book'){
@@ -30,18 +31,21 @@ if($action == 'search_book'){
 
 if($action == 'return_book'){
 	$records = Query::getAllUserInfo($_SESSION['name']);
-	$confirm;
 	include '../View/return.php';
 }
 
 
 if($action == 'search'){
-	$book_title = filter_input(INPUT_POST, 'book-title');
-	$fauthor = filter_input(INPUT_POST, 'fauthor');
-	$lauthor = filter_input(INPUT_POST, 'lauthor');
+	$book_title = ucwords(filter_input(INPUT_POST, 'book-title'));
+	$fauthor = ucwords(filter_input(INPUT_POST, 'fauthor'));
+	$lauthor = ucwords(filter_input(INPUT_POST, 'lauthor'));
+	$month = sprintf("%02d", rand(01, 12));
+	$day = sprintf("%02d", rand(01, 31));
+	$callno = mt_rand(100000, 999999);
+	$duedate = "2018-"."$month"."-"."$day";
 	if(Query::findBook($book_title, $fauthor, $lauthor) == True){
 		//ADD CODE THAT CONFIRMS BOOK WAS ADDED.
-		Query::orderBook($_SESSION['user']->getFName(), $_SESSION['user']->getLName(),$_SESSION['user']->getCardNo(), $_SESSION['user']->getEmail(), $book_title, $fauthor, $lauthor, $_SESSION['user']->getCallNo(), $_SESSION['user']->getDate(), $_SESSION['user']->getPatronName());
+		Query::orderBook($_SESSION['user']->getFName(), $_SESSION['user']->getLName(),$_SESSION['user']->getCardNo(), $_SESSION['user']->getEmail(), $book_title, $fauthor, $lauthor, $callno, $duedate, $_SESSION['user']->getPatronName());
 		header('Location: index.php?action=search_book&confirm=yes');
 	}
 	else{

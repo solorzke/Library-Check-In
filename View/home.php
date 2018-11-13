@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+<?php session_start(); 
+
+if(isset($confirm)){
+	if($confirm == 'no'){ echo "<script type='text/javascript'>alert('No Record Exists! Create Record by Searching and Requesting a book.'); </script>"; }
+}
+
+?>
 
 <!DOCTYPE html>
 <html>

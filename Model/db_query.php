@@ -46,7 +46,7 @@ class Query{
 
 	public static function getUserInfo($patronName){
 		$db = Database::getDB();
-		$query = 'SELECT * FROM kas58.records WHERE patronName = :patronName';
+		$query = 'SELECT * FROM kas58.patrons WHERE patronName = :patronName';
 		$statement = $db->prepare($query);
 		$statement->bindValue(':patronName', "$patronName");
 		$statement->execute();
@@ -54,10 +54,7 @@ class Query{
 		$statement->closeCursor();
 		$user;
 
-		foreach($record as $rec){
-			$user = new User($rec[0], $rec[1],$rec[2],$rec[3],$rec[4], $rec[5],$rec[6],$rec[7],$rec[8],$rec[9],
-				$rec[10], $rec[11], $rec[12]);
-		}
+		foreach($record as $rec){ $user = new User($rec[0], $rec[1],$rec[2],$rec[3],$rec[4], $rec[5]); break; }
 		return $user;
 	}
 
@@ -68,15 +65,20 @@ class Query{
 		$statement->bindValue(':patronName', "$patronName");
 		$statement->execute();
 		$record = $statement->fetchAll();
+		$rowCount = $statement->rowCount();
 		$statement->closeCursor();
-		$i = 0;
-		$arr = [];
-		foreach($record as $rec){
-			$arr[$i] = new User($rec[0], $rec[1],$rec[2],$rec[3],$rec[4], $rec[5],$rec[6],$rec[7],$rec[8],$rec[9],
-				$rec[10], $rec[11], $rec[12]);
-			$i++;
+
+		if($rowCount == 0 || $rowCount == null){ return false; }
+		else {
+			$i = 0;
+			$arr = [];
+			foreach($record as $rec){
+				$arr[$i] = new User($rec[0], $rec[1],$rec[2],$rec[3],$rec[4], $rec[5],$rec[6],$rec[7],$rec[8],$rec[9],
+					$rec[10], $rec[11], $rec[12]);
+				$i++;
+			}
+			return $arr;
 		}
-		return $arr;
 	}
 
 	public static function findBook($book, $fauthor, $lauthor){
