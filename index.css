@@ -1,0 +1,23 @@
+table, th, td {	border: 1px solid black; }
+
+html{
+	background-color: #f7f0b9;
+	font-family: 'Raleway', sans-serif;
+}
+
+.login-form{
+	margin: 100px 30%;
+	font-size: 30px;
+	border: 10px solid #8e70af;
+	background-color: white;
+}
+
+.login-box{
+	margin: 10px 60px;
+}
+
+.home-box{
+	font-size: 15px;
+	margin: 10px 60px;
+
+}

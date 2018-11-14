@@ -26,6 +26,7 @@ if($action == 'view_record'){
 }
 
 if($action == 'search_book'){
+	$books = Query::getAllBooks();
 	include '../View/search.php';
 }
 
@@ -37,6 +38,7 @@ if($action == 'return_book'){
 
 if($action == 'search'){
 	$book_title = ucwords(filter_input(INPUT_POST, 'book-title'));
+	$_SESSION['book-order'] = $book_title;
 	$fauthor = ucwords(filter_input(INPUT_POST, 'fauthor'));
 	$lauthor = ucwords(filter_input(INPUT_POST, 'lauthor'));
 	$month = sprintf("%02d", rand(01, 12));
@@ -46,7 +48,7 @@ if($action == 'search'){
 	if(Query::findBook($book_title, $fauthor, $lauthor) == True){
 		//ADD CODE THAT CONFIRMS BOOK WAS ADDED.
 		Query::orderBook($_SESSION['user']->getFName(), $_SESSION['user']->getLName(),$_SESSION['user']->getCardNo(), $_SESSION['user']->getEmail(), $book_title, $fauthor, $lauthor, $callno, $duedate, $_SESSION['user']->getPatronName());
-		header('Location: index.php?action=search_book&confirm=yes');
+		header('Location: index.php?action=search_book&confirm=yes&author='.$fauthor.'%20'.$lauthor.'&callno='.$callno.'&duedate='.$duedate);
 	}
 	else{
 		//ADD CODE THAT ALERTS USER THE BOOK WAS REQUESTED
@@ -56,6 +58,7 @@ if($action == 'search'){
 
 if($action == 'return'){
 	$id = filter_input(INPUT_POST, 'id');
+	$_SESSION['book-return'] = $_POST['book-title'];
 	Query::returnBook($id);
 	header('Location: index.php?action=return_book&confirm=yes');
 }

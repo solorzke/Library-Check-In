@@ -24,19 +24,26 @@
 
 			}
 		</script>
+		<link rel="stylesheet" type="text/css" href="../index.css">
+		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 	</head>
 	<body>
 		<form name = "form" method="POST" action="../Control/register.php" onsubmit="return validate();">
 			<label>Enter first name: </label>
 			<input type="text" name="fname">
+			<br>
 			<label>Enter last name: </label>
 			<input type="text" name="lname">
+			<br>
 			<label>Enter Email Address: </label>
 			<input type="email" name="email">
+			<br>
 			<label>Enter a Card No: </label>
 			<input type="number" name="card-number" placeholder="Only Digits">
+			<br>
 			<label>Enter a Patron Username: </label>
 			<input type="text" name="patron-name">
+			<br>
 			<input type="submit" name="submit" value="Confirm">
 		</form>
 		<p>Already have a Patron Account? <a href="login.html">Sign In Here</a></p>

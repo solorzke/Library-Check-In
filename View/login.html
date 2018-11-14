@@ -2,21 +2,25 @@
 <html>
 	<head>
 		<title>IT202 - HW4 Login</title>
+		<link rel="stylesheet" type="text/css" href="../index.css">
+		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 	</head>
 	<body>
-		<h2>Sign Into LUS</h2>
-		<form method="POST" action="../Control/login.php">
-			<label>Patron Name: </label>
-			<input type="text" name="name" placeholder="Case Sensitive">
-			<br>
-
-			<label>Card Number: </label>
-			<input type="password" name="card-number">
-			<br>
-			<input type="hidden" name="action" value="login">
-
-			<input type="submit" name="submit" value="Login">
-		</form>
-		<p>Don't have an account? <a href="register.html">Register Here</a></p>
+		<div class="login-form">
+			<div class="login-box">
+				<h2>Sign Into LUS</h2>
+				<form method="POST" action="../Control/login.php">
+					<label>Patron Name: </label>
+					<input type="text" name="name" placeholder="Case Sensitive">
+					<br>
+					<label>Card Number: </label>
+					<input type="password" name="card-number">
+					<br>
+					<input type="hidden" name="action" value="login">
+					<input type="submit" name="submit" value="Login">
+				</form>
+				<p>Don't have an account? <a href="register.html">Register Here</a></p>
+			</div>
+		</div>
 	</body>
 </html>

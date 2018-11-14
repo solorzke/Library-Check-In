@@ -3,24 +3,6 @@ include 'user.php';
 include 'database.php';
 
 class Query{
-	/*
-	public static function verify($user){
-		$db = Database::getDB();
-		$patronName = $user->getPatronName();
-		$cardNo = $user->getCardNo();
-		$query = 'SELECT id FROM kas58.patrons WHERE patronName = :patronName AND cardNo = :cardNo';
-		$statement = $db->prepare($query);		
-		$statement->bindValue(':patronName', "$patronName");
-		$statement->bindValue(':cardNo', "$cardNo");
-		$statement->execute();
-
-		$rowCount = $statement->rowCount();
-		$statement->closeCursor();
-
-		if($rowCount == 1){ return True; }
-		else{ return False; }
-	}
-	*/
 
 	public static function verify($cardno, $patronname, $fname = null, $lname = null, $email = null){
 		$db = Database::getDB();
@@ -94,23 +76,7 @@ class Query{
 		if($num_results >= 1){ return True; }
 		else{ return False; }
 	}
-	/*
-	public static function addBook($book, $fauthor, $lauthor){
-		$db = Database::getDB();
-		$query = 'INSERT INTO kas58.books (bookTitle, authorFirst, authorLast, callNumber) VALUES (:book, :fauthor, :lauthor, :callno)';
-		$query_2 = 'INSERT INTO kas58.records (bookTitleOnOrder, bookAuthorOnOrder) VALUES (:bookorder, :bookauthor)';
-		$statement = $db->prepare($query);
-		$statement_2 = $db->prepare($query_2);
-		$statement->bindValue(':book', "$book");
-		$statement->bindValue(':fauthor', "$fauthor");
-		$statement->bindValue(':lauthor', "$lauthor");
-		$statement_2->bindValue(':bookorder', "$book");
-		$statement_2->bindValue(':bookauthor', "$fauthor"." "."$lauthor");
-		$statement->execute();
-		$statement_2->execute();
 
-	}
-	*/
 	public static function orderBook($fname, $lname, $cardno, $email, $book, $fauthor, $lauthor, $callno, $date, $patronName){
 		$db = Database::getDB();
 		$query = 'INSERT INTO kas58.records (fname, lname, cardNo, email, bookTitle, bookFAuthor, bookLAuthor, callNumber, dueDate, patronName) VALUES(:fname, :lname, :cardno, :email, :book, :fauthor, :lauthor, :callno, :duedate, :patronName)';
@@ -151,20 +117,16 @@ class Query{
 		$statement->closeCursor();
 	}
 
-	/*
-	public static function patronExists($fname, $lname, $email, $cardno, $patronname){
+	public static function getAllBooks(){
 		$db = Database::getDB();
-		$query = 'SELECT * FROM kas58.patrons WHERE fname = :fname AND lname = :lname AND email = :email AND patronName = :patronname AND cardNo = :cardno';
+		$query = 'SELECT * FROM kas58.books';
 		$statement = $db->prepare($query);
-		$statement->bindValue(':fname', "$fname");
-		$statement->bindValue(':lname', "$lname");
-		$statement->bindValue(':email', "$email");
-		$statement->bindValue(':patronname', "$patronname");
-		$statement->bindValue(':cardno', "$cardno");
 		$statement->execute();
+		$books = $statement->fetchAll();
 		$statement->closeCursor();
+		return $books;
 	}
-*/
+
 	public static function emailExists($email){
 		$db = Database::getDB();
 		$query = 'SELECT email FROM kas58.patrons WHERE email = :email';

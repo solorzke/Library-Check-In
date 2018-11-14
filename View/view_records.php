@@ -3,6 +3,8 @@
 <html>
 	<head>
 		<title>IT202 - HW4</title>
+		<link rel="stylesheet" type="text/css" href="../index.css">
+		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 	</head>
 	<body>
 		<a href="../Control/index.php?action=sign_out">Log Out</a>
